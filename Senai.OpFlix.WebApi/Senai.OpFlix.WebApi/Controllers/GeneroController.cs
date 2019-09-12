@@ -24,6 +24,8 @@ namespace Senai.OpFlix.WebApi.Controllers
             GeneroRepository = new GeneroRepository();
         }
 
+        [Authorize(Roles = "Administrador")]
+
         [HttpGet]
 
         public IActionResult Listar()
@@ -39,7 +41,7 @@ namespace Senai.OpFlix.WebApi.Controllers
                 Generos genero = GeneroRepository.BuscarPorId(id);
                 if (genero == null)
                     return NotFound();
-                    return Ok();
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -48,29 +50,53 @@ namespace Senai.OpFlix.WebApi.Controllers
         }
 
         [Authorize(Roles = "Administrador")]
-
         [HttpPost]
         public IActionResult Cadastrar(Generos genero)
         {
+            // try
+            //{
+            //  int IdGenero = Convert.ToInt32(HttpContext.User.Claims.First(x => x.Type == JwtRegisteredClaimNames.Jti).Value);
+            //     genero.IdGenero = IdGenero;
+            //    genero.Nome = ToString();
+            //     GeneroRepository.Cadastrar(genero);
+            //   return Ok();
+            // }
+            //catch (System.Exception ex)
+            // {
+            //   return BadRequest(new { mensagem = ex.Message });
+            // }
+
+
             try
             {
-                int IdGenero = Convert.ToInt32(HttpContext.User.Claims.First(x => x.Type == JwtRegisteredClaimNames.Jti).Value);
-                genero.IdGenero = IdGenero;
-                genero.Nome = ToString();
                 GeneroRepository.Cadastrar(genero);
                 return Ok();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                return BadRequest(new { mensagem = ex.Message });
+                return BadRequest(new { mensagem = "Eita, erro: " + ex.Message });
             }
+
+
+            //using (OpFlixContext ctx = new OpFlixContext())
+            //{
+            //    Generos GenerosBuscada = ctx.Generos.FirstOrDefault(x => x.IdCategoria == categoria.IdCategoria);
+            //    // update categorias set nome = @nome
+            //    GenerosBuscada.Nome = genero.Nome;
+            //    // insert - add, delete - remove, update - update
+            //    ctx.Generos.Update(GenerosBuscada);
+            //    // efetivar
+            //    ctx.SaveChanges();
+            //}
         }
-            [HttpDelete("{id}")]
-            public IActionResult Deletar(int id)
-            {
-                GeneroRepository.Deletar(id);
-                return Ok();
-            }
+        [HttpDelete("{id}")]
+        public IActionResult Deletar(int id)
+        {
+            GeneroRepository.Deletar(id);
+            return Ok();
+        }
+
+        [Authorize(Roles = "Administrador")]
 
         [HttpPut]
         public IActionResult Atualizar(Generos genero)
@@ -90,7 +116,7 @@ namespace Senai.OpFlix.WebApi.Controllers
             }
         }
 
-        
+
     }
 }
 

@@ -7,32 +7,30 @@ using System.Threading.Tasks;
 
 namespace Senai.OpFlix.WebApi.Repositorios
 {
-    public class PlataformaRepository : IPlataformaRepository
+    public class LancamentoRepository : ILancamentoRepository
     {
-        public void Ataulizar(Plataformas plataforma)
+        public void Atualizar(Lancamentos lancamento)
         {
             using (OpFlixContext ctx = new OpFlixContext())
             {
-                Plataformas PlataformaBuscada = ctx.Plataformas.FirstOrDefault(x => x.IdPlataforma == plataforma.IdPlataforma);
-                PlataformaBuscada.Nome = plataforma.Nome;
-                ctx.Plataformas.Update(PlataformaBuscada);
+                ctx.Lancamentos.Add(lancamento);
                 ctx.SaveChanges();
             }
         }
 
-        public Plataformas BuscarPorId(int id)
+        public Lancamentos BuscarPorId(int id)
         {
             using (OpFlixContext ctx = new OpFlixContext())
             {
-                return ctx.Plataformas.Find(id);
+                return ctx.Lancamentos.Find(id);
             }
         }
 
-        public void Cadastrar(Plataformas plataforma)
+        public void Cadastrar(Lancamentos lancamento)
         {
             using (OpFlixContext ctx = new OpFlixContext())
             {
-                ctx.Plataformas.Add(plataforma);
+                ctx.Lancamentos.Add(lancamento);
                 ctx.SaveChanges();
             }
         }
@@ -40,18 +38,18 @@ namespace Senai.OpFlix.WebApi.Repositorios
         public void Deletar(int id)
         {
             using (OpFlixContext ctx = new OpFlixContext())
-                {
-                Plataformas plataforma = ctx.Plataformas.Find(id);
-                ctx.Plataformas.Remove(plataforma);
+            {
+                Lancamentos lancamento = ctx.Lancamentos.Find(id);
+                ctx.Lancamentos.Remove(lancamento);
                 ctx.SaveChanges();
             }
         }
 
-        public List<Plataformas> Listar()
+        public List<Lancamentos> Listar()
         {
             using (OpFlixContext ctx = new OpFlixContext())
             {
-                return ctx.Plataformas.ToList();
+                return ctx.Lancamentos.ToList();
             }
         }
     }
