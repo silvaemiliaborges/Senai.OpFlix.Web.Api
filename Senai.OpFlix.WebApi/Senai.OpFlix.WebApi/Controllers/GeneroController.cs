@@ -103,6 +103,7 @@ namespace Senai.OpFlix.WebApi.Controllers
         {
             try
             {
+                
                 Generos GeneroBuscado = GeneroRepository.BuscarPorId(genero.IdGenero);
                 if (GeneroBuscado == null)
                     return NotFound();

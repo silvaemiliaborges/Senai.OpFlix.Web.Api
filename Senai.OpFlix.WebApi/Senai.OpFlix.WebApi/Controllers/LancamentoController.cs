@@ -44,7 +44,7 @@ namespace Senai.OpFlix.WebApi.Controllers
                 Lancamentos lancamento = LancamentoRepository.BuscarPorId(id);
                 if (lancamento == null)
                     return NotFound();
-                return Ok();
+                return Ok(lancamento);
             }
             catch (Exception ex)
             {
@@ -58,9 +58,9 @@ namespace Senai.OpFlix.WebApi.Controllers
         {
             try
             {
-                int IdLancamento = Convert.ToInt32(HttpContext.User.Claims.First(x => x.Type == JwtRegisteredClaimNames.Jti).Value);
-                lancamento.IdLancamento = IdLancamento;
-                lancamento.Nome = ToString();
+                //int IdLancamento = Convert.ToInt32(HttpContext.User.Claims.First(x => x.Type == JwtRegisteredClaimNames.Jti).Value);
+                //lancamento.IdLancamento = IdLancamento;
+                //lancamento.Nome = ToString();
                 LancamentoRepository.Cadastrar(lancamento);
                 return Ok();
             }
@@ -84,18 +84,18 @@ namespace Senai.OpFlix.WebApi.Controllers
         [HttpPut]
         public IActionResult Atualizar(Lancamentos lancamento)
         {
-            try
-            {
+            //try
+            //{
                 Lancamentos LancamentoBuscado = LancamentoRepository.BuscarPorId(lancamento.IdLancamento);
                 if (LancamentoBuscado == null)
                     return NotFound();
                 LancamentoRepository.Atualizar(lancamento);
                 return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { mensagem = "Hiiiiiiihhhh!" });
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    return BadRequest(new { mensagem = "Hiiiiiiihhhh!" });
+            //}
         }
 
 

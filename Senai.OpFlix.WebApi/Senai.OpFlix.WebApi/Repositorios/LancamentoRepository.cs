@@ -13,7 +13,7 @@ namespace Senai.OpFlix.WebApi.Repositorios
         {
             using (OpFlixContext ctx = new OpFlixContext())
             {
-                ctx.Lancamentos.Add(lancamento);
+                ctx.Lancamentos.Update(lancamento);
                 ctx.SaveChanges();
             }
         }

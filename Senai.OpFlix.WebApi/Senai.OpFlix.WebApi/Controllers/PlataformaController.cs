@@ -37,10 +37,10 @@ namespace Senai.OpFlix.WebApi.Controllers
         {
             try
             {
-                Plataformas plstaforma = PlataformaRepository.BuscarPorId(id);
-                if (plstaforma == null)
+                Plataformas plataforma = PlataformaRepository.BuscarPorId(id);
+                if (plataforma == null)
                     return NotFound();
-                return Ok();
+                return Ok(plataforma);
             }
             catch (Exception ex)
             {
@@ -55,9 +55,9 @@ namespace Senai.OpFlix.WebApi.Controllers
         {
             try
             {
-                int IdPlataforma = Convert.ToInt32(HttpContext.User.Claims.First(x => x.Type == JwtRegisteredClaimNames.Jti).Value);
-                plataforma.IdPlataforma = IdPlataforma;
-                plataforma.Nome = ToString();
+                //int IdPlataforma = Convert.ToInt32(HttpContext.User.Claims.First(x => x.Type == JwtRegisteredClaimNames.Jti).Value);
+                //plataforma.IdPlataforma = IdPlataforma;
+                //plataforma.Nome = ToString();
                 PlataformaRepository.Cadastrar(plataforma);
                 return Ok();
             }
