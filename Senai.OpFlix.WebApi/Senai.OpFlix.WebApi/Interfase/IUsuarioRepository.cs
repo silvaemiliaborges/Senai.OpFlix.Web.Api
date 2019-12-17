@@ -9,6 +9,11 @@ namespace Senai.OpFlix.WebApi.Interfase
 {
     public interface IUsuarioRepository
     {
+        List<Usuarios> Listar();
+        void Cadastrar(Usuarios usuario);
+
         Usuarios BuscarPorEmailESenha(LoginViewModel login);
+
+        
     }
 }

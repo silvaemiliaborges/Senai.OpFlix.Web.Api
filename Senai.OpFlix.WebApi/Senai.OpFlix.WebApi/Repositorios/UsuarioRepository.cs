@@ -21,5 +21,20 @@ namespace Senai.OpFlix.WebApi.Repositorios
                 return usuario;
             }
         }
+        public void Cadastrar(Usuarios usuario)
+        {
+            using (OpFlixContext ctx = new OpFlixContext())
+            {
+                ctx.Usuarios.Add(usuario);
+                ctx.SaveChanges();
+            }
+        }
+        public List<Usuarios> Listar()
+        {
+            using (OpFlixContext ctx = new OpFlixContext())
+            {
+                return ctx.Usuarios.ToList();
+            }
+        }
     }
 }

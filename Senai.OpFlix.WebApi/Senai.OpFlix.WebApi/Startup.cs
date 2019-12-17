@@ -51,7 +51,18 @@ namespace Senai.OpFlix.WebApi
             {
                 c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "OpFlix API", Version = "v1" });
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
         }
+
+
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -68,6 +79,8 @@ namespace Senai.OpFlix.WebApi
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "OpFlix API V1");
             });
+
+            app.UseCors("CorsPolicy");
 
             app.UseMvc();
         }

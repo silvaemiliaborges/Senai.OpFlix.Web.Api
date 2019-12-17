@@ -14,6 +14,7 @@ namespace Senai.OpFlix.WebApi.Domains
         public int? IdPlataforma { get; set; }
         public int? IdGenero { get; set; }
         public int? IdTipo { get; set; }
+        public string Imagem { get; set; }
 
         public Generos IdGeneroNavigation { get; set; }
         public Plataformas IdPlataformaNavigation { get; set; }
